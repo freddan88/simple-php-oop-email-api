@@ -20,6 +20,16 @@ class Response {
         exit;
     }
 
+    protected function customResponse($message, $status)
+    {
+        $json = [
+            "message" => $message,
+            "success" => $status
+        ];
+        echo json_encode($json);
+        exit;
+    }
+
     protected function addFieldError($message, $field)
     {
         $this->fieldErrors[$field] = $message;
