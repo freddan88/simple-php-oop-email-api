@@ -35,7 +35,7 @@ class Response {
         $this->fieldErrors[$field] = $message;
     }
 
-    public function getFieldErrors()
+    protected function getFieldErrors()
     {
         $json = [
             'fieldErrors' => $this->fieldErrors
