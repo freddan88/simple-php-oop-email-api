@@ -9,23 +9,27 @@ class Response {
     static function error($httpStatus, $origin = null)
     {
         $response = [
-            'http_code' => $httpStatus['code'],
-            'http_message' => $httpStatus['message'],
+            'code' => $httpStatus['code'],
+            'message' => $httpStatus['message'],
             'success' => false,
         ];
+
         if (!empty($origin)) {
             $response['origin'] = $origin;
         }
+
         echo json_encode($response);
         exit;
     }
 
-    protected function customResponse($message, $status)
+    protected function customResponse($httpCode, $message, $status)
     {
         $json = [
-            "message" => $message,
-            "success" => $status
+            'code' => $httpCode,
+            'message' => $message,
+            'success' => $status,
         ];
+
         echo json_encode($json);
         exit;
     }
@@ -35,11 +39,15 @@ class Response {
         $this->fieldErrors[$field] = $message;
     }
 
-    protected function getFieldErrors()
+    protected function getFieldErrors($httpStatus)
     {
         $json = [
-            'fieldErrors' => $this->fieldErrors
+            'code' => $httpStatus['code'],
+            'message' => $httpStatus['message'],
+            'fieldErrors' => $this->fieldErrors,
+            'success' => false,
         ];
+
         echo json_encode($json);
     }
 }

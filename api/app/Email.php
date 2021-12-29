@@ -33,14 +33,14 @@ class Email extends Response {
 
     public function validate()
     {
-        if (empty($this->emailTo)) $this->error($this->httpStatuses[503]);
+        if (empty($this->emailTo)) $this->error($this->httpStatuses[400]);
         if (empty($this->senderName)) $this->senderName = 'Anonymous';
         if (empty($this->senderEmail)) $this->addFieldError('Email is missing', 'senderEmail');
         if (empty($this->emailSubject)) $this->addFieldError('Subject is missing', 'emailSubject');
         if (empty($this->emailMessage)) $this->addFieldError('Message is missing', 'emailMessage');
 
         if (!array_key_exists('emailTo', $this->fieldErrors)) {
-            if (!filter_var($this->emailTo, FILTER_VALIDATE_EMAIL)) $this->error($this->httpStatuses[503]);
+            if (!filter_var($this->emailTo, FILTER_VALIDATE_EMAIL)) $this->error($this->httpStatuses[400]);
         }
 
         if (!array_key_exists('senderEmail', $this->fieldErrors)) {
@@ -48,7 +48,7 @@ class Email extends Response {
         }
 
         if (count($this->fieldErrors) > 0) {
-            $this->getFieldErrors();
+            $this->getFieldErrors($this->httpStatuses[400]);
             return false;
         }
 
@@ -78,9 +78,15 @@ class Email extends Response {
 
         $email_status = mail($this->emailTo, $this->emailSubject, $body, $headers);
 
-        if (!$email_status) $this->customResponse('Email failed to send', false);
+        if (!$email_status) {
+            $httpCode = 500;
+            $message = 'Email failed to send';
+            $status = false;
 
-        $this->customResponse('Email sent successfully', true);
+            $this->customResponse($httpCode, $message, $status);
+        }
+
+        $this->customResponse(200, 'Email sent successfully', true);
     }
 
 }
