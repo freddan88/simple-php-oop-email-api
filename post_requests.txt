@@ -1,0 +1,8 @@
+Required = *
+
+- apikey *
+- emailTo *
+- senderEmail *
+- senderName
+- emailSubject *
+- emailMessage *
