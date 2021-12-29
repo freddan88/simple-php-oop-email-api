@@ -88,5 +88,4 @@ class Email extends Response {
 
         $this->customResponse(200, 'Email sent successfully', true);
     }
-
 }
