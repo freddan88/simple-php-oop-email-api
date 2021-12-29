@@ -23,6 +23,14 @@ class Email extends Response {
         $this->emailMessage = trim(filter_var($data['emailMessage'], FILTER_SANITIZE_STRING));
     }
 
+    private function getDatetimeNow()
+    {
+        $tz_object = new DateTimeZone('Europe/Stockholm');
+        $datetime = new DateTime();
+        $datetime->setTimezone($tz_object);
+        return $datetime->format('Y-m-d H:i');
+    }
+
     public function validate()
     {
         if (empty($this->emailTo)) $this->error($this->httpStatuses[503]);
@@ -31,11 +39,11 @@ class Email extends Response {
         if (empty($this->emailSubject)) $this->addFieldError('Subject is missing', 'emailSubject');
         if (empty($this->emailMessage)) $this->addFieldError('Message is missing', 'emailMessage');
 
-        if (!$this->fieldErrors['emailTo']) {
+        if (!array_key_exists('emailTo', $this->fieldErrors)) {
             if (!filter_var($this->emailTo, FILTER_VALIDATE_EMAIL)) $this->error($this->httpStatuses[503]);
         }
 
-        if (!$this->fieldErrors['emailMessage']) {
+        if (!array_key_exists('senderEmail', $this->fieldErrors)) {
             if (!filter_var($this->senderEmail, FILTER_VALIDATE_EMAIL)) $this->addFieldError("Not a valid email address", "senderEmail");
         }
 
@@ -49,8 +57,30 @@ class Email extends Response {
 
     public function send()
     {
-        echo json_encode('sending email!');
-        exit;
+        $headers = "From: $this->senderName <$this->senderEmail>\r\n" .
+        "MIME-Version: 1.0" . "\r\n" .
+        "Content-type: text/html; charset=UTF-8" . "\r\n";
+        $message = nl2br(wordwrap($this->emailMessage, 80));
+        $date = $this->getDatetimeNow();
+
+        $body = "
+        <html>
+        <body>
+        From: $this->senderName <br/>
+        Mail: <a href='mailto:$this->senderEmail'>$this->senderEmail</a><br/>
+        Date: $date<br/>
+        -----
+        <br/>
+        $message
+        </body>
+        </html>
+        ";
+
+        $email_status = mail($this->emailTo, $this->emailSubject, $body, $headers);
+
+        if (!$email_status) $this->customResponse('Email failed to send', false);
+
+        $this->customResponse('Email sent successfully', true);
     }
 
 }
