@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-require_once('./controllers/Security.php');
-require_once('./controllers/Response.php');
+require_once('./app/Security.php');
+require_once('./app/Response.php');
 
 $configuration = parse_ini_file("config.ini", true);
 
@@ -29,7 +29,7 @@ $req = $_SERVER['REQUEST_URI'];
 $req = trim($req, '/');
 $req = parse_url($req, PHP_URL_PATH);
 
-require_once('./controllers/Email.php');
+require_once('./app/Email.php');
 
 if($req === 'email') {
     $email = new Email($_POST);
