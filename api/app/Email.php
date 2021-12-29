@@ -16,11 +16,11 @@ class Email extends Response {
         $configuration = parse_ini_file("config.ini", true);
         $this->httpStatuses = $configuration['http_codes'];
 
-        $this->emailTo = trim(filter_var($data['emailTo'], FILTER_SANITIZE_EMAIL));
-        $this->senderName = trim(filter_var($data['senderName'], FILTER_SANITIZE_STRING));
-        $this->senderEmail = trim(filter_var($data['senderEmail'], FILTER_SANITIZE_EMAIL));
-        $this->emailSubject = trim(filter_var($data['emailSubject'], FILTER_SANITIZE_STRING));
-        $this->emailMessage = trim(filter_var($data['emailMessage'], FILTER_SANITIZE_STRING));
+        empty($data['emailTo']) ? '' : $this->emailTo = trim(filter_var($data['emailTo'], FILTER_SANITIZE_EMAIL));
+        empty($data['senderName']) ? '' : $this->senderName = trim(filter_var($data['senderName'], FILTER_SANITIZE_STRING));
+        empty($data['senderEmail']) ? '' : $this->senderEmail = trim(filter_var($data['senderEmail'], FILTER_SANITIZE_EMAIL));
+        empty($data['emailSubject']) ? '' : $this->emailSubject = trim(filter_var($data['emailSubject'], FILTER_SANITIZE_STRING));
+        empty($data['emailMessage']) ? '' : $this->emailMessage = trim(filter_var($data['emailMessage'], FILTER_SANITIZE_STRING));
     }
 
     private function getDatetimeNow()
