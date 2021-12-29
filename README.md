@@ -1,4 +1,4 @@
-[:updated]: # "2021-12-30"
+[//]: # "updated: 2021-12-30"
 
 ## simple-php-oop-email-api
 
