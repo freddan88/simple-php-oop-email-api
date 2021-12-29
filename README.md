@@ -8,11 +8,12 @@ Enhancements of previous php email-api
 
 [Code License: MIT](https://choosealicense.com/licenses/mit/)
 
-| My Links: |                                                               |
-| --------- | ------------------------------------------------------------- |
-| WebPage:  | [leemann.se/fredrik](http://www.leemann.se/fredrik)           |
-| YouTube:  | [youtube.com/FreLee54](https://www.youtube.com/user/FreLee54) |
-| GitHub:   | [github.com/freddan88](https://github.com/freddan88)          |
+| My Links: |                                                                                      |
+| --------- | ------------------------------------------------------------------------------------ |
+| WebPage:  | [leemann.se/fredrik](http://www.leemann.se/fredrik)                                  |
+| YouTube:  | [youtube.com/FreLee54](https://www.youtube.com/user/FreLee54)                        |
+| LinkedIn  | [linkedin.com/fredrik-leemann](https://se.linkedin.com/in/fredrik-leemann-821b19110) |
+| GitHub:   | [github.com/freddan88](https://github.com/freddan88)                                 |
 
 ### Tested with
 
