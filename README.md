@@ -1,3 +1,7 @@
+---
+Date: 2021-12-30
+---
+
 ## simple-php-oop-email-api
 
 Enhancements of previous php email-api
