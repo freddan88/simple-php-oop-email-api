@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /app.conf.php
+Disallow: /config.ini
