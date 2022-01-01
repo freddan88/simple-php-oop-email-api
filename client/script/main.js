@@ -1,5 +1,5 @@
 const contactForm = document.getElementById("contact-form");
-const requiredFields = document.getElementsByClassName("field-required");
+const formElements = Array.from(contactForm.elements);
 
 const handleApiResponse = (data) => {
   console.log(data);
@@ -40,10 +40,13 @@ const buildFormData = (event) => {
   }
 };
 
-contactForm.addEventListener("submit", buildFormData);
-
-[...requiredFields].forEach((requiredField) => {
-  requiredField.addEventListener("focus", () => {
-    requiredField.classList.remove("field-error");
-  });
+formElements.forEach((formElement) => {
+  if (formElement.hasAttribute("required")) {
+    formElement.addEventListener("focus", () => {
+      formElement.classList.remove("field-error");
+      formElement.nextElementSibling.textContent = "";
+    });
+  }
 });
+
+contactForm.addEventListener("submit", buildFormData);
