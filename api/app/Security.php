@@ -20,10 +20,10 @@ class Security {
 
     static function validateRemoteDomain($currentDomain, $allowedDomains)
     {
+        header('Access-Control-Allow-Origin: ' . $currentDomain);
+        header("Access-Control-Allow-Headers: Content-Type");
+        header("Access-Control-Allow-Methods: POST");
         if (in_array($currentDomain, $allowedDomains)) {
-            header('Access-Control-Allow-Origin: ' . $currentDomain);
-            header("Access-Control-Allow-Headers: Content-Type");
-            header("Access-Control-Allow-Methods: POST");
             return true;
         } else {
             return false;
