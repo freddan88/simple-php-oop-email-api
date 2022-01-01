@@ -21,6 +21,7 @@ Enhancements of previous php email-api
 - [Apache](https://www.apache.org)
 - [Insomnia](https://insomnia.rest)
 - [Postman](https://www.postman.com)
+- [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 - [Axios](https://www.npmjs.com/package/axios)
 
 #### OBS! Only tested with web servers like Apache and PHP:s built in
