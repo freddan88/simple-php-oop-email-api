@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') Response::error($httpStatuses[405]);
 
 if (empty($_POST['apikey'])) Response::error($httpStatuses[400]);
 
-if ($_POST['apikey'] !== $allowedKey) Response::error($httpStatuses[400]);
+if ($_POST['apikey'] !== $allowedKey) Response::error($httpStatuses[403]);
 
 $req = $_SERVER['REQUEST_URI'];
 $req = trim($req, '/');
@@ -31,7 +31,7 @@ $req = parse_url($req, PHP_URL_PATH);
 
 require_once('./app/Email.php');
 
-if($req === 'email') {
+if ($req === 'email') {
     $email = new Email($_POST);
     if ($email->validate()) $email->send();
 } else {
