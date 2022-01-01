@@ -41,7 +41,7 @@ Enhancements of previous php email-api
 
 1. Clone or download this repository
 2. Rename config_example.ini to ./api/config.ini
-3. Configure "allowed_domains" in ./api/config.ini
+3. Configure "allowed_origins" in ./api/config.ini
 4. Configure valid "api_key" in ./api/config.ini
 5. Upload the api-folder to your webserver
 
@@ -58,7 +58,7 @@ git clone https://github.com/freddan88/simple-php-oop-email-api.git
 
 ### Functionalities:
 
-1. Security checks with api key and origin (domain)
+1. Security checks with api key and remote origin
 2. Validation and sanitization of data sent from user
 3. Error and success messages are sent back to client as json
 

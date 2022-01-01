@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class Security {
 
-    static function getRemoteDomain()
+    static function getRemoteOrigin()
     {
         if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
             return $_SERVER['HTTP_ORIGIN'];
@@ -18,12 +18,12 @@ class Security {
         return '';
     }
 
-    static function validateRemoteDomain($currentDomain, $allowedDomains)
+    static function validateRemoteOrigin($currentOrigin, $allowedOrigins)
     {
-        header('Access-Control-Allow-Origin: ' . $currentDomain);
+        header('Access-Control-Allow-Origin: ' . $currentOrigin);
         header("Access-Control-Allow-Headers: Content-Type");
         header("Access-Control-Allow-Methods: POST");
-        if (in_array($currentDomain, $allowedDomains)) {
+        if (in_array($currentOrigin, $allowedOrigins)) {
             return true;
         } else {
             return false;

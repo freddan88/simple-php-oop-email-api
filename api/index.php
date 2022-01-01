@@ -7,16 +7,16 @@ require_once('./app/Response.php');
 
 $configuration = parse_ini_file("config.ini", true);
 
-$allowedDomains = $configuration['security']['allowed_domains'];
+$allowedOrigins = $configuration['security']['allowed_origins'];
 
 $httpStatuses = $configuration['http_codes'];
 
 $allowedKey = $configuration['security']['api_key'];
 
-$currentDomain = Security::getRemoteDomain();
+$currentOrigin = Security::getRemoteOrigin();
 
-if (!Security::validateRemoteDomain($currentDomain, $allowedDomains)) {
-    Response::error($httpStatuses[403], $currentDomain);
+if (!Security::validateRemoteOrigin($currentOrigin, $allowedOrigins)) {
+    Response::error($httpStatuses[403], $currentOrigin);
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') Response::error($httpStatuses[405]);
