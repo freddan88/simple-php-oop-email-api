@@ -2,7 +2,7 @@
 
 ## simple-php-oop-email-api
 
-Enhancements of previous php email-api
+Enhancements of previous PHP email-api
 
 > Post formdata and send emails by using the built in mail function in PHP
 
@@ -83,4 +83,4 @@ git clone https://github.com/freddan88/simple-php-oop-email-api.git
 
 > Post formData using javascript from bootstrap-form
 
-- [Frontendcode can be found here:](https://github.com/freddan88/simple-php-oop-email-api/tree/main/client)
+- [Frontend-code can be found in the client-directory](https://github.com/freddan88/simple-php-oop-email-api/tree/main/client)
