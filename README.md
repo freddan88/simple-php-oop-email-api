@@ -78,3 +78,9 @@ git clone https://github.com/freddan88/simple-php-oop-email-api.git
 | senderName   | Name of the sender   | No       |
 | emailSubject | Subject of the email | Yes      |
 | emailMessage | Message of the email | Yes      |
+
+### Example frontend-code
+
+> Post formData using javascript from bootstrap-form
+
+- [Frontendcode can be found here:](https://github.com/freddan88/simple-php-oop-email-api/tree/main/client)
