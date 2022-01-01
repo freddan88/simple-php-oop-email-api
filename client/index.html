@@ -30,7 +30,7 @@
     </style>
   </head>
   <body class="container">
-    <form id="contact-form">
+    <form id="contact-form" novalidate>
       <div class="mb-3">
         <label for="senderName" class="form-label">Your name:</label>
         <input
@@ -46,8 +46,8 @@
         <label for="senderEmail" class="form-label">Your email: *</label>
         <input
           required
-          type="email"
-          class="form-control field-required"
+          type="text"
+          class="form-control"
           id="senderEmail"
           placeholder="Enter your email"
           name="senderEmail"
@@ -59,7 +59,7 @@
         <label for="emailMessage" class="form-label">Your message: *</label>
         <textarea
           required
-          class="form-control field-required"
+          class="form-control"
           id="emailMessage"
           name="emailMessage"
           placeholder="Enter your message"
