@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 require_once('./app/Response.php');
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') Response::error($httpStatuses[405]);
-
 $configuration = parse_ini_file("config.ini", true);
 
-$allowedOrigins = $configuration['security']['allowed_origins'];
-
 $httpStatuses = $configuration['http_codes'];
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') Response::error($httpStatuses[405]);
+
+$allowedOrigins = $configuration['security']['allowed_origins'];
 
 $allowedKey = $configuration['security']['api_key'];
 
