@@ -14,8 +14,11 @@ const handleApiResponse = (data) => {
     }
   } else {
     const cssClass = data.success ? "alert-success" : "alert-danger";
-    const alertBox = `<div id="form-messages" class="mt-3 alert text-center ${cssClass}" role="alert">${data.message}</div>`;
+    const alertBox = `<div id="form-message" class="mt-3 alert text-center ${cssClass}" role="alert">${data.message}</div>`;
     contactForm.insertAdjacentHTML("beforebegin", alertBox);
+    setTimeout(() => {
+      document.getElementById("form-message").remove();
+    }, 3000);
   }
 
   contactForm.classList.remove("disabled");
