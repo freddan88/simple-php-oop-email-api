@@ -18,19 +18,21 @@ class Response {
             $response['origin'] = $origin;
         }
 
+        http_response_code((int)$httpStatus['code']);
         echo json_encode($response);
         exit;
     }
 
     protected function customResponse($httpCode, $message, $status)
     {
-        $json = [
+        $response = [
             'code' => $httpCode,
             'message' => $message,
             'success' => $status,
         ];
 
-        echo json_encode($json);
+        http_response_code((int)$httpCode);
+        echo json_encode($response);
         exit;
     }
 
@@ -41,13 +43,14 @@ class Response {
 
     protected function getFieldErrors($httpStatus)
     {
-        $json = [
+        $response = [
             'code' => $httpStatus['code'],
             'message' => $httpStatus['message'],
             'fieldErrors' => $this->fieldErrors,
             'success' => false,
         ];
 
-        echo json_encode($json);
+        http_response_code((int)$httpStatus['code']);
+        echo json_encode($response);
     }
 }
