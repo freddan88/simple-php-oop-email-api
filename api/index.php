@@ -6,10 +6,10 @@ require_once('./app/Response.php');
 
 $configuration = parse_ini_file("config.ini", true);
 
-$serverStatus = $configuration['server'];
 $httpStatuses = $configuration['http_codes'];
+$apiStatus = (int)$configuration['api']['enabled'];
 
-if (!(int)$serverStatus['enabled']) Response::error($httpStatuses[503]);
+if (!$apiStatus) Response::error($httpStatuses[503]);
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') Response::error($httpStatuses[405]);
 
