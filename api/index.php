@@ -6,7 +6,10 @@ require_once('./app/Response.php');
 
 $configuration = parse_ini_file("config.ini", true);
 
+$serverStatus = $configuration['server'];
 $httpStatuses = $configuration['http_codes'];
+
+if (!(int)$serverStatus['enabled']) Response::error($httpStatuses[503]);
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') Response::error($httpStatuses[405]);
 
@@ -37,5 +40,5 @@ if ($req === 'email') {
     $email = new Email($_POST);
     if ($email->validate()) $email->send();
 } else {
-    Response::error($httpStatuses[503]);
+    Response::error($httpStatuses[501]);
 }
