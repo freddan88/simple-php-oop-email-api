@@ -35,6 +35,7 @@ class Email extends Response {
     {
         if (empty($this->emailTo)) $this->error($this->httpStatuses[400]);
         if (empty($this->senderName)) $this->senderName = 'Anonymous';
+        if (empty($this->senderEmail)) $this->senderEmail = 'Anonymous';
         // if (empty($this->senderEmail)) $this->addFieldError('Email is missing', 'senderEmail');
         if (empty($this->emailSubject)) $this->addFieldError('Subject is missing', 'emailSubject');
         if (empty($this->emailMessage)) $this->addFieldError('Message is missing', 'emailMessage');
@@ -43,13 +44,9 @@ class Email extends Response {
             if (!filter_var($this->emailTo, FILTER_VALIDATE_EMAIL)) $this->error($this->httpStatuses[400]);
         }
 
-        if (!empty($this->senderEmail)) {
+        if (!array_key_exists('senderEmail', $this->fieldErrors)) {
             if (!filter_var($this->senderEmail, FILTER_VALIDATE_EMAIL)) $this->addFieldError("Not a valid email address", "senderEmail");
         }
-
-        // if (!array_key_exists('senderEmail', $this->fieldErrors)) {
-        //     if (!filter_var($this->senderEmail, FILTER_VALIDATE_EMAIL)) $this->addFieldError("Not a valid email address", "senderEmail");
-        // }
 
         if (count($this->fieldErrors) > 0) {
             $this->getFieldErrors($this->httpStatuses[400]);
@@ -61,8 +58,6 @@ class Email extends Response {
 
     public function send()
     {
-        $senderEmailLink = empty($this->senderEmail) ? "-" : "<a href='mailto:$this->senderEmail'>$this->senderEmail</a>";
-
         $headers = "From: $this->senderName <$this->senderEmail>\r\n" .
         "MIME-Version: 1.0" . "\r\n" .
         "Content-type: text/html; charset=UTF-8" . "\r\n";
@@ -73,7 +68,7 @@ class Email extends Response {
         <html>
         <body>
         From: $this->senderName <br/>
-        Mail: $senderEmailLink<br/>
+        Mail: <a href='mailto:$this->senderEmail'>$this->senderEmail</a><br/>
         Date: $date<br/>
         -----
         <br/>
