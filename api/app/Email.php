@@ -35,7 +35,8 @@ class Email extends Response {
     {
         if (empty($this->emailTo)) $this->error($this->httpStatuses[400]);
         if (empty($this->senderName)) $this->senderName = 'Anonymous';
-        if (empty($this->senderEmail)) $this->addFieldError('Email is missing', 'senderEmail');
+        if (empty($this->senderEmail)) $this->senderEmail = 'Anonymous';
+        // if (empty($this->senderEmail)) $this->addFieldError('Email is missing', 'senderEmail');
         if (empty($this->emailSubject)) $this->addFieldError('Subject is missing', 'emailSubject');
         if (empty($this->emailMessage)) $this->addFieldError('Message is missing', 'emailMessage');
 
